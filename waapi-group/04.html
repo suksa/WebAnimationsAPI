@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Starfield</title>
+	<style>
+		body {
+			overflow: hidden;
+			background-color: black;
+		}
+
+		.star {
+			position: absolute;
+			width: 3px;
+			height: 3px;
+			font-size: 0;
+			border-radius: 50%;
+			background: white;
+		}
+	</style>
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.2/web-animations-next.min.js" integrity="sha512-7/fijTA9Hz7UI8uTqERZ89YumtyKAO4QJ1IvsHCqr7SX26X8FrGDyn2+oMt571I0VeceUiA8WZxCBOZorHxB6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script type="module">
+		import Star from './star.js'
+		
+		const numberOfStars = 200
+
+		let zModifier = window.innerHeight
+		let scale
+		let x, y, z
+		for (let i = 0; i < numberOfStars; i += 1) {
+			x = Math.random() * window.innerWidth
+			y = Math.random() * window.innerHeight
+			z = Math.random() * zModifier
+			scale = zModifier / (zModifier + z)
+			new Star(i, x, y, scale)
+		}
+	</script>
+</body>
+</html>

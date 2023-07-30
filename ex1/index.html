@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #div {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div"></div>
+    <div id="btnGroup">
+        <button data-function="play">play</button>
+        <button data-function="pause">pause</button>
+        <button data-function="faster">x2</button>
+    </div>
+
+    <script>
+        const el = document.querySelector('#div')
+        const animation = el.animate(
+            [
+                {transform: 'translateX(0px)', opacity: 0},
+                {transform: 'translateX(100px)', opacity: 1},
+            ],
+            {
+                duration: 1000,
+                easing: 'linear',
+                fill: "forwards",
+                // iterations: Infinity,
+                // direction: "alternate"
+            }
+        )
+
+        const btns = document.querySelector('#btnGroup')
+        btns.addEventListener('click', (e) => {
+            switch (e.target.dataset.function) {
+                case 'play':
+                console.log('play')
+                animation.play()
+                break
+                case 'pause':
+                console.log('pause')
+                animation.pause()
+                break
+                case 'faster':
+                console.log('faster')
+                if (animation.playbackRate === 1) {
+                    animation.playbackRate = 2
+                } else {
+                    animation.playbackRate = 1
+                }
+                break
+            }
+        })
+
+        console.log(animation.finished)
+        animation.finished.then(data => {
+            console.log(data)
+        })
+    </script>
+</body>
+</html>
